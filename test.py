@@ -8,14 +8,9 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from appium.webdriver.common.mobileby import MobileBy
 
-caps = {}
-caps["platformName"] = "Android"
-caps["platformVersion"] = "10"
-caps["deviceName"] = "polaris"
-caps["appPackage"] = "com.baidu.searchbox"
-caps["appActivity"] = "com.baidu.searchbox.SplashActivity"
+from device_conf import caps1
 
-driver = webdriver.Remote("http://localhost:4723/wd/hub", caps)
+driver = webdriver.Remote("http://localhost:4723/wd/hub", caps1)
 
 # el1 = driver.find_element_by_id("com.baidu.searchbox:id/positive_button")
 # el1.click()
@@ -30,7 +25,7 @@ driver = webdriver.Remote("http://localhost:4723/wd/hub", caps)
 # el5.click()
 #等待元素可见
 WebDriverWait(driver,20).until(EC.visibility_of_element_located((MobileBy.ID,"com.baidu.searchbox:id/positive_button")))
-#定位多个元素
+#classname定位多个元素
 # eles1 = driver.find_elements_by_class_name('android.widget.Button')
 # print('多个元素：',eles1)
 #uiautomator定位表达式中，要用双引号。
