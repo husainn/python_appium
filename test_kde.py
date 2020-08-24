@@ -8,6 +8,12 @@ from device_conf import caps2
 
 driver = webdriver.Remote("http://localhost:4723/wd/hub", caps2)
 try:
+    driver.find_element_by_id('com.paic.esale.activity:id/btn1').click()
+except Exception as e:
+    print(e)
+
+
+try:
     el1 = driver.find_element_by_id("com.lbe.security.miui:id/permission_allow_foreground_only_button")
     el1.click()
 
