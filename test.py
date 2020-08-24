@@ -72,6 +72,11 @@ driver.switch_to.context(contexts[-1])
 
 #html当中的元素定位和元素操作 ==chromedriver
 WebDriverWait(driver,20).until(EC.visibility_of_element_located((MobileBy.ID,"id")))
+driver.find_element_by_id('id').click()
+
+driver.press_keycode()
+
+
 # driver.quit()
 
 

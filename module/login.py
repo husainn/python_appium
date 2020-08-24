@@ -6,7 +6,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from appium.webdriver.common.mobileby import MobileBy
 
-from common.common_func import swipe_page
+from Common.common_func import swipe_page
 
 
 class Login:
