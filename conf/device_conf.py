@@ -13,4 +13,4 @@ caps2["platformVersion"] = "10"
 caps2["deviceName"] = "polaris"
 caps2["appPackage"] = "com.paic.esale.activity"
 caps2["appActivity"] = "com.paic.esale.ui.activity.WelcomeActivity"
-caps2["noReset"] = True
+# caps2["noReset"] = True
