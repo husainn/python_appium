@@ -29,4 +29,20 @@
 - 滑屏操作
   - swipe(起始X，起始Y，结束X，结束Y)  
 
-- 切换到H5
+- 手势密码
+  - ![1598195080443](C:\Users\Mloong\AppData\Roaming\Typora\typora-user-images\1598195080443.png)
+
+- webview
+  - hybird混合应用自动化方案，基于UiAutomator+Chromedriver
+  - native走UiAutomator，webview部分走Chromedriver，二者结合
+  - 要求：
+    - Android4.4+
+    - webview必须为debug版本
+  - 获取webview页面的三种方式
+    - chrome://inspect,需要FQ
+    - 使用driver.page_source获取html页面
+    - 找开发人员要源文件
+    - uc_devtools不需要FQ
+  - 切换到webview的步骤
+    - 
+
