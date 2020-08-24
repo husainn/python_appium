@@ -29,3 +29,4 @@
 - 滑屏操作
   - swipe(起始X，起始Y，结束X，结束Y)  
 
+-gengxin
