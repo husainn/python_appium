@@ -62,10 +62,16 @@ driver.swipe(0.5*x,0.2*y,0.5*x,0.8*y)
 time.sleep(1)
 
 
+WebDriverWait(driver,20).until(EC.visibility_of_element_located((MobileBy.CLASS_NAME,"android.webkit.WebView")))
+time.sleep(3)
+#切换到webview中
+print(driver.current_activity)
+#获取所有的上下文
+contexts = driver.contexts
+driver.switch_to.context(contexts[-1])
 
-
-
-
+#html当中的元素定位和元素操作 ==chromedriver
+WebDriverWait(driver,20).until(EC.visibility_of_element_located((MobileBy.ID,"id")))
 
 # driver.quit()
 
