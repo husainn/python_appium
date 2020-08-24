@@ -1,7 +1,7 @@
 import time
 
 
-def swipe_page(driver,direction,number,during=0):
+def swipe_page(driver,direction,number=1,during=0):
     x = driver.get_window_size()['width']
     y = driver.get_window_size()['height']
     for i in range(number):

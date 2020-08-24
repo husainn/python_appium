@@ -8,7 +8,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from appium.webdriver.common.mobileby import MobileBy
 
-from device_conf import caps1
+from conf.device_conf import caps1
 
 driver = webdriver.Remote("http://localhost:4723/wd/hub", caps1)
 
