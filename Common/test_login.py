@@ -4,8 +4,9 @@ from ddt import ddt, data, unpack
 
 from conf.device_conf import caps2
 from module.login import Login
-import logging
 from Log import logger
+import logging
+
 
 data1 = [
     {'account': '1120103025', 'psd': 'Pafc1502'},
