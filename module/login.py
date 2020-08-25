@@ -7,7 +7,8 @@ from selenium.webdriver.support import expected_conditions as EC
 from appium.webdriver.common.mobileby import MobileBy
 
 from Common.common_func import swipe_page
-
+import logging
+from Log import logger
 
 class Login:
 
@@ -16,8 +17,10 @@ class Login:
         try:
             el1 = driver.find_element_by_id("com.lbe.security.miui:id/permission_allow_foreground_only_button")
             el1.click()
+            logging.info('点击{}成功'.format('com.lbe.security.miui:id/permission_allow_foreground_only_button'))
         except Exception as e:
             print('ele1', e)
+            logging.error(e)
         WebDriverWait(driver, 20).until(
             EC.visibility_of_element_located((MobileBy.ID, 'com.paic.esale.activity:id/btn1')))
         try:
@@ -25,9 +28,12 @@ class Login:
         except Exception as e:
             print(e)
         time.sleep(1)
+        logging.info('开始滑动')
         swipe_page(driver, 'left', 3)
+        logging.info('完成滑动页面')
         time.sleep(1)
         # 立即体验
+        logging.info('点击立即体验')
         driver.find_element_by_id('com.paic.esale.activity:id/btnStart').click()
         time.sleep(0.5)
         # driver.find_element_by_id('com.paic.esale.activity:id/btn1').click()
@@ -36,10 +42,13 @@ class Login:
         # 同意
         driver.find_element_by_id('com.paic.esale.activity:id/pbt_dialog_sure').click()
         # 账号
+        logging.info('输入账号')
         driver.find_element_by_id('com.paic.esale.activity:id/et_account').send_keys(account)
         # 密码
+        logging.info('输入密码')
         driver.find_element_by_id('com.paic.esale.activity:id/et_password').send_keys(psd)
         # 登录
+        logging.info('点击登录')
         driver.find_element_by_id('com.paic.esale.activity:id/rl_login').click()
 
     def gesture_login(self, driver,scene):
