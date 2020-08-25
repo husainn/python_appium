@@ -4,8 +4,8 @@ from ddt import ddt, data, unpack
 
 from conf.device_conf import caps2
 from module.login import Login
-from Log import logger
 import logging
+from Log import logger
 
 
 data1 = [
