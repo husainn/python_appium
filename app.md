@@ -45,4 +45,5 @@
     - uc_devtools不需要FQ
   - 切换到webview的步骤
     - 
-
+- Chromedriver文件替换路径
+  - C:\Users\Administrator\AppData\Local\Programs\Appium\resources\app\node_modules\appium\node_modules\appium-chromedriver\chromedriver\win

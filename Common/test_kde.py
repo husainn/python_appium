@@ -16,8 +16,8 @@ try:
     el1.click()
 except Exception as e:
     print('ele1',e)
-WebDriverWait(driver,20).until(EC.visibility_of_element_located((MobileBy.ID,'com.paic.esale.activity:id/btn1')))
 try:
+    WebDriverWait(driver, 20).until(EC.visibility_of_element_located((MobileBy.ID, 'com.paic.esale.activity:id/btn1')))
     driver.find_element_by_id('com.paic.esale.activity:id/btn1').click()
 except Exception as e:
     print(e)
@@ -44,10 +44,16 @@ WebDriverWait(driver,20).until(EC.visibility_of_element_located((MobileBy.ID,'co
 driver.find_element_by_id('com.paic.esale.activity:id/pbt_dialog_cancel').click()
 #手势密码设置跳过
 driver.find_element_by_android_uiautomator('new UiSelector().text("跳过")').click()
+time.sleep(2)
+driver.find_element_by_id('com.lbe.security.miui:id/permission_allow_foreground_only_button').click()
 time.sleep(1)
+try:
+    driver.find_element_by_id('com.lbe.security.miui:id/permission_allow_foreground_only_button').click()
+except Exception as e:
+    print('not find',e)
 #手势密码设置设置
-# x = driver.get_window_size()['width']
-# y = driver.get_window_size()['height']
+x = driver.get_window_size()['width']
+y = driver.get_window_size()['height']
 # print(x,y)
 # point1 = (1/5*x,1/3*y)
 # point2 = (1/2*x,1/3*y)
@@ -72,3 +78,24 @@ time.sleep(1)
 #         .move_to(x=int(point6[0]),y=int(point6[1])).wait(1500)\
 #         .release().perform()
 #     time.sleep(5)
+point = (1/5*x,1/3*y)
+time.sleep(5)
+try:
+    TouchAction(driver).tap(x=int(point[0]),y=int(point[1])).wait(2000)\
+        .tap(x=int(point[0]),y=int(point[1])).wait(3500)\
+        .tap(x=int(point[0]),y=int(point[1])).wait(6000)\
+        .tap(x=int(point[0]),y=int(point[1])).wait(1500).release().perform()
+except Exception as e:
+    print(e)
+time.sleep(1)
+driver.find_element_by_id('com.paic.esale.activity:id/tv_hot_menu2').click()
+WebDriverWait(driver,20).until(EC.visibility_of_element_located((MobileBy.CLASS_NAME,"android.webkit.WebView")))
+time.sleep(3)
+#切换到webview中
+print(driver.current_context)
+#获取所有的上下文
+contexts = driver.contexts
+print(contexts)
+driver.switch_to.context(contexts[-1])
+
+driver.find_element_by_xpath('//*[@id="app"]/div[3]/div[2]/div[2]/div/div[2]/div/a[3]/span').click()
