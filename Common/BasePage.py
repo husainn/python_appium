@@ -8,6 +8,7 @@ import logging
 from Log import logger
 import time
 
+from Common.common_func import swipe_page
 from conf.device_conf import caps2
 
 
@@ -23,6 +24,7 @@ class BasePage:
         '''
         try:
             #开始时间
+            logging.info('等待操作----')
             start_time = time.time()
             WebDriverWait(self.driver, wait_times, poll_frequency).until(
                 EC.visibility_of_element_located(locator))
@@ -89,6 +91,7 @@ class BasePage:
             self._screenshot(model)
             # 抛出异常
             raise
+
     # 获取元素的文本
     def get_text(self,locator,model=''):
         #找到元素
@@ -102,7 +105,17 @@ class BasePage:
             self._screenshot(model)
             # 抛出异常
             raise
-
+    def swipe_pages(self,direction,number,model=''):
+        #找到元素
+        try:
+            swipe_page(self.driver,direction,number)
+        except:
+            # 捕获异常到日志中：
+            logging.exception('获取文本内容失败：')
+            # 截图 - 保存到指定的目录，名字要怎么取？
+            self._screenshot(model)
+            # 抛出异常
+            raise
 
     def _screenshot(self,model_name):
         #时间

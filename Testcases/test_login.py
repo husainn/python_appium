@@ -15,6 +15,9 @@ data2 = [
     {'scene': 'different'},
 ]
 
+def test_demo():
+    print('我是测试用例')
+
 @ddt
 class Test_login(unittest.TestCase):
 
@@ -26,7 +29,8 @@ class Test_login(unittest.TestCase):
     @unpack
     def test_account_login(self, account, psd):
         logging.info('开始登录{}账号'.format(account))
-        self.Login.account_login(self.driver, account, psd)
+        self.Login.origin_activity()
+        self.Login.account_login(account, psd)
         logging.info('{}测试完成'.format(account))
 
     # @data(*data2)

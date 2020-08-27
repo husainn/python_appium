@@ -11,43 +11,55 @@ from Common.common_func import swipe_page
 import logging
 from Log import logger
 from PageLocators.login_page_locator import LoginPageLocator
+from PageLocators.origin_page_locator import OriginPageLocator
 
 
-class Login(LoginPageLocator,BasePage):
+class Login(LoginPageLocator,BasePage,OriginPageLocator):
 
-    def origin_activity(self,driver):
-        time.sleep(1)
-        try:
-            el1 = driver.find_element_by_id("com.lbe.security.miui:id/permission_allow_foreground_only_button")
-            el1.click()
-            logging.info('点击{}成功'.format('com.lbe.security.miui:id/permission_allow_foreground_only_button'))
-        except Exception as e:
-            print('ele1', e)
-            logging.error(e)
-        WebDriverWait(driver, 20).until(
-            EC.visibility_of_element_located((MobileBy.ID, 'com.paic.esale.activity:id/btn1')))
-        try:
-            driver.find_element_by_id('com.paic.esale.activity:id/btn1').click()
-        except Exception as e:
-            print(e)
-        time.sleep(1)
-        logging.info('开始滑动')
-        swipe_page(driver, 'left', 3)
-        logging.info('完成滑动页面')
-        time.sleep(1)
+    def origin_activity(self):
+        #权限弹框
+        name = '初始化页面'
+        self.click_element(self.permission_allow,name)
+        # try:
+        #     el1 = driver.find_element_by_id("com.lbe.security.miui:id/permission_allow_foreground_only_button")
+        #     el1.click()
+        #     logging.info('点击{}成功'.format('com.lbe.security.miui:id/permission_allow_foreground_only_button'))
+        # except Exception as e:
+        #     print('ele1', e)
+        #     logging.error(e)
+        #升级弹框
+        self.click_element(self.update_cancel,name)
+        # WebDriverWait(driver, 20).until(
+        #     EC.visibility_of_element_located((MobileBy.ID, 'com.paic.esale.activity:id/btn1')))
+        # try:
+        #     driver.find_element_by_id('com.paic.esale.activity:id/btn1').click()
+        # except Exception as e:
+        #     print(e)
+        #滑动
+        self.swipe_pages('left',3,name)
+        # logging.info('开始滑动')
+        # swipe_page(driver, 'left', 3)
+        # logging.info('完成滑动页面')
+        # time.sleep(1)
         # 立即体验
-        logging.info('点击立即体验')
-        driver.find_element_by_id('com.paic.esale.activity:id/btnStart').click()
-        time.sleep(0.5)
+        self.click_element(self.lijitiyan,name)
+        # logging.info('点击立即体验')
+        # driver.find_element_by_id('com.paic.esale.activity:id/btnStart').click()
+        #unknow
+        self.click_element(self.unknow,name)
+        # time.sleep(0.5)
         # driver.find_element_by_id('com.paic.esale.activity:id/btn1').click()
         # 隐私政策
-        driver.find_element_by_id('com.paic.esale.activity:id/cb_privacypolicy').click()
+        self.click_element(self.yinsizhengce,name)
+        # driver.find_element_by_id('com.paic.esale.activity:id/cb_privacypolicy').click()
         # 同意
-        driver.find_element_by_id('com.paic.esale.activity:id/pbt_dialog_sure').click()
+        self.click_element(self.allow_btn,name)
+        # driver.find_element_by_id('com.paic.esale.activity:id/pbt_dialog_sure').click()
 
     def account_login(self, account, psd):
         # 账号
-        self.wait_ele_visible(self.user_input)
+        name = '登录页面_登录功能'
+        self.wait_ele_visible(self.user_input,model=name)
         logging.info('输入账号')
         self.input_text(self.user_input,account)
         # driver.find_element_by_id('com.paic.esale.activity:id/et_account').send_keys(account)
