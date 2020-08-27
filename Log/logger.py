@@ -16,4 +16,4 @@ fh = logging.FileHandler(path,encoding='utf-8')
 sh = logging.StreamHandler()#输出到控制台
 format='%(asctime)s - %(pathname)s[line:%(lineno)d] - %(levelname)s: %(message)s'
 
-logging.basicConfig(level=logging.DEBUG,handlers=[fh,sh],format=format)
+logging.basicConfig(level=logging.INFO,handlers=[fh,sh],format=format)
