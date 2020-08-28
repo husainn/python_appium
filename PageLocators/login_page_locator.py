@@ -9,3 +9,5 @@ class LoginPageLocator:
     passwd_input = (MobileBy.ID,'com.paic.esale.activity:id/et_password')
     #登录按钮
     login_button = (MobileBy.ID,'com.paic.esale.activity:id/rl_login')
+    #指纹取消按钮
+    finger_cancel =(MobileBy.ID,'com.paic.esale.activity:id/pbt_dialog_cancel')

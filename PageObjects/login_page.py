@@ -28,6 +28,7 @@ class Login(LoginPageLocator,BasePage,OriginPageLocator):
         #     print('ele1', e)
         #     logging.error(e)
         #升级弹框
+        self.wait_ele_visible(self.update_cancel,model=name)
         self.click_element(self.update_cancel,name)
         # WebDriverWait(driver, 20).until(
         #     EC.visibility_of_element_located((MobileBy.ID, 'com.paic.esale.activity:id/btn1')))
@@ -36,6 +37,7 @@ class Login(LoginPageLocator,BasePage,OriginPageLocator):
         # except Exception as e:
         #     print(e)
         #滑动
+        time.sleep(1)
         self.swipe_pages('left',3,name)
         # logging.info('开始滑动')
         # swipe_page(driver, 'left', 3)
@@ -46,10 +48,12 @@ class Login(LoginPageLocator,BasePage,OriginPageLocator):
         # logging.info('点击立即体验')
         # driver.find_element_by_id('com.paic.esale.activity:id/btnStart').click()
         #unknow
-        self.click_element(self.unknow,name)
+        # self.wait_ele_visible(self.unknow,model=name)
+        # self.click_element(self.unknow,name)
         # time.sleep(0.5)
         # driver.find_element_by_id('com.paic.esale.activity:id/btn1').click()
         # 隐私政策
+        self.wait_ele_visible(self.yinsizhengce,model=name)
         self.click_element(self.yinsizhengce,name)
         # driver.find_element_by_id('com.paic.esale.activity:id/cb_privacypolicy').click()
         # 同意
@@ -70,6 +74,10 @@ class Login(LoginPageLocator,BasePage,OriginPageLocator):
         # 登录
         logging.info('点击登录')
         self.click_element(self.login_button)
+        time.sleep(5)
+        self.wait_ele_visible(self.finger_cancel,model=name)
+        return self.get_text(self.finger_cancel)
+
         # driver.find_element_by_id('com.paic.esale.activity:id/rl_login').click()
 
     def gesture_login(self, driver,scene):

@@ -31,7 +31,6 @@ class BasePage:
             end_time = time.time()
             logging.info('等待耗时{}'.format(start_time-end_time))
         except:
-
             # 捕获异常到日志中：
             logging.exception('等待元素可见：')
             # 截图 - 保存到指定的目录，名字要怎么取？
@@ -42,7 +41,7 @@ class BasePage:
     # 查找元素
     def get_element(self, locator,model=''):
         try:
-            return self.driver.find_element(locator[0], locals([1]))
+            return self.driver.find_element(locator[0], locator[1])
         except:
             # 捕获异常到日志中：
             logging.exception('查找元素失败：')

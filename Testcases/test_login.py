@@ -2,6 +2,9 @@ import unittest
 from appium import webdriver
 from ddt import ddt, data, unpack
 
+from BasePage import BasePage
+from PageLocators.login_page_locator import LoginPageLocator
+from PageLocators.origin_page_locator import OriginPageLocator
 from conf.device_conf import caps2
 from PageObjects.login_page import Login
 import logging
@@ -19,18 +22,19 @@ def test_demo():
     print('我是测试用例')
 
 @ddt
-class Test_login(unittest.TestCase):
+class Test_login(unittest.TestCase,LoginPageLocator):
 
     def setUp(self):
         self.Login = Login()
-        self.driver = webdriver.Remote("http://localhost:4723/wd/hub", caps2)
 
     @data(*data1)
     @unpack
     def test_account_login(self, account, psd):
         logging.info('开始登录{}账号'.format(account))
         self.Login.origin_activity()
-        self.Login.account_login(account, psd)
+        button_name =  self.Login.account_login(account, psd)
+        print(button_name)
+        self.assertEqual(button_name,'取消')
         logging.info('{}测试完成'.format(account))
 
     # @data(*data2)
@@ -39,7 +43,8 @@ class Test_login(unittest.TestCase):
     #     self.Login.gesture_login(self.driver,scene)
 
     def tearDown(self):
-        self.driver.quit()
+        pass
+        # self.driver.quit()
 
 
 if __name__ == '__main__':
