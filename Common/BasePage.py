@@ -1,12 +1,12 @@
 import os
 
 from appium import webdriver
-from appium.webdriver.common.mobileby import MobileBy
+from appium.webdriver.common.touch_action import TouchAction
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import logging
-from Log import logger
 import time
+from Common import logger
 
 from Common.common_func import swipe_page
 from conf.device_conf import caps2
@@ -32,8 +32,8 @@ class BasePage:
             logging.info('等待耗时{}'.format(start_time-end_time))
         except:
             # 捕获异常到日志中：
-            logging.exception('等待元素可见：')
-            # 截图 - 保存到指定的目录，名字要怎么取？
+            logging.exception('等待{}元素可见'.format(locator[1]))
+            # 截图 - 保存到指定的目录
             self._screenshot(model)
             # 抛出异常
             raise
@@ -45,7 +45,7 @@ class BasePage:
         except:
             # 捕获异常到日志中：
             logging.exception('查找元素失败：')
-            # 截图 - 保存到指定的目录，名字要怎么取？
+            # 截图 - 保存到指定的目录
             self._screenshot(model)
             # 抛出异常
             raise
@@ -59,7 +59,7 @@ class BasePage:
         except:
             # 捕获异常到日志中：
             logging.exception('输入操作失败：')
-            # 截图 - 保存到指定的目录，名字要怎么取？
+            # 截图 - 保存到指定的目录
             self._screenshot(model)
             # 抛出异常
             raise
@@ -72,7 +72,7 @@ class BasePage:
         except:
             # 捕获异常到日志中：
             logging.exception('点击操作失败：')
-            # 截图 - 保存到指定的目录，名字要怎么取？
+            # 截图 - 保存到指定的目录
             self._screenshot(model)
             # 抛出异常
             raise
@@ -86,7 +86,7 @@ class BasePage:
         except:
             # 捕获异常到日志中：
             logging.exception('获取元素属性失败：')
-            # 截图 - 保存到指定的目录，名字要怎么取？
+            # 截图 - 保存到指定的目录
             self._screenshot(model)
             # 抛出异常
             raise
@@ -100,18 +100,18 @@ class BasePage:
         except:
             # 捕获异常到日志中：
             logging.exception('获取文本内容失败：')
-            # 截图 - 保存到指定的目录，名字要怎么取？
+            # 截图 - 保存到指定的目录
             self._screenshot(model)
             # 抛出异常
             raise
+
     def swipe_pages(self,direction,number,model=''):
-        #找到元素
         try:
             swipe_page(self.driver,direction,number)
         except:
             # 捕获异常到日志中：
             logging.exception('获取文本内容失败：')
-            # 截图 - 保存到指定的目录，名字要怎么取？
+            # 截图 - 保存到指定的目录
             self._screenshot(model)
             # 抛出异常
             raise
@@ -122,3 +122,47 @@ class BasePage:
         filePath = os.path.join(basePath,'ScreenShot','{}_{}.png'.format(model_name,time.strftime('%Y%m%d_%H%M%S')))
         self.driver.save_screenshot(filePath)
         logging.info('截图成功，图片路径为：{}'.format(filePath))
+
+    def gesture(self,scene,model=''):
+        try:
+            x = self.driver.get_window_size()['width']
+            y = self.driver.get_window_size()['height']
+            point1 = (1 / 5 * x, 1 / 3 * y)
+            point2 = (1 / 2 * x, 1 / 3 * y)
+            point3 = (4 / 5 * x, 1 / 3 * y)
+            point4 = (1 / 2 * x, 1 / 2 * y)
+            point5 = (1 / 5 * x, 2 / 3 * y)
+            point6 = (1 / 2 * x, 2 / 3 * y)
+
+            if scene == 'same':
+                for i in range(2):
+                    TouchAction(self.driver).press(x=int(point1[0]), y=int(point1[1])).wait(2000) \
+                        .move_to(x=int(point1[0]), y=int(point1[1])).wait(1500) \
+                        .move_to(x=int(point2[0]), y=int(point2[1])).wait(1500) \
+                        .move_to(x=int(point3[0]), y=int(point3[1])).wait(1500) \
+                        .move_to(x=int(point4[0]), y=int(point4[1])).wait(1500) \
+                        .move_to(x=int(point5[0]), y=int(point5[1])).wait(1500) \
+                        .move_to(x=int(point6[0]), y=int(point6[1])).wait(1500) \
+                        .release().perform()
+                    time.sleep(1)
+            elif scene == 'different':
+                TouchAction(self.driver).press(x=int(point1[0]), y=int(point1[1])).wait(2000) \
+                    .move_to(x=int(point1[0]), y=int(point1[1])).wait(1500) \
+                    .move_to(x=int(point2[0]), y=int(point2[1])).wait(1500) \
+                    .move_to(x=int(point3[0]), y=int(point3[1])).wait(1500) \
+                    .move_to(x=int(point4[0]), y=int(point4[1])).wait(1500) \
+                    .move_to(x=int(point5[0]), y=int(point5[1])).wait(1500) \
+                    .move_to(x=int(point6[0]), y=int(point6[1])).wait(1500) \
+                    .release().perform()
+                time.sleep(1)
+                TouchAction(self.driver).press(x=int(point1[0]), y=int(point1[1])).wait(2000) \
+                    .move_to(x=int(point1[0]), y=int(point1[1])).wait(1500) \
+                    .move_to(x=int(point2[0]), y=int(point2[1])).wait(1500) \
+                    .move_to(x=int(point3[0]), y=int(point3[1])).wait(1500) \
+                    .move_to(x=int(point4[0]), y=int(point4[1])).wait(1500) \
+                    .move_to(x=int(point5[0]), y=int(point5[1])).wait(1500) \
+                    .release().perform()
+        except:
+            logging.exception('手势失败')
+            self._screenshot(model)
+            raise

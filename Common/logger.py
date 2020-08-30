@@ -9,9 +9,9 @@ WARNING：意想不到的事情发生了，或预示着某个问题。但软件�
 ERROR：出现更严重的问题，软件无法执行某些功能。Value=40。
 CRITICAL：严重错误，程序本身可能无法继续运行。Value=50。
 '''
-path = os.path.dirname(__file__)+'\log.txt'
+path =os.path.join(os.path.dirname(os.path.dirname(__file__)),'Log','log.txt')
 
-# print(path)
+print(path)
 fh = logging.FileHandler(path,encoding='utf-8')
 sh = logging.StreamHandler()#输出到控制台
 format='%(asctime)s - %(pathname)s[line:%(lineno)d] - %(levelname)s: %(message)s'

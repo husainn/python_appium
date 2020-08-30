@@ -50,6 +50,7 @@
   - 测试数据 TestDatas
 
 - 重运行机制
+  
   - pytest
   
 - pytest
@@ -79,5 +80,38 @@
     - 在测试用例/测试类前面加上：@pytest.mark.标记名
     - 示例：@pytest.mark.smoke
 
+- pytest常用指令
+  - pytest -m smoke 运行标记为smoke的用例
+  - pytest -m smoke --html=HtmlReports/report.html  指定测试报告的路径
+  - pytest -m smoke Testcase 运行指定目录下的用例
+  - pytest -m smoke Testcase/testlogin.py 运行指定模块下的用例
+  - pytest -k 'xxx'  匹配文件名、类名、方法名匹配表达式的用例
+  - 运行指定的用例，使用节点id：  py模块名::类名::函数名 或者 py模块名::函数名
+    - 示例pytest test_xxx.py::TestXXX::func_xxx 
 
 
+
+- fixture
+  - conftest.py  == pytest自动识别的文件。名字不可以更改，存放的fixture，可以放多个
+  - 一个fixture表示一个前置和后置
+  - 可以放多个
+- 实现fixture：
+  - 装饰器加函数实现，@pytest.fixture
+  - 使用yield返回数据，用在用例中用方法名称进行传参
+- 调用的时候：测试用例/测试类的前面
+  - @pytest.mark.usefixture('fixture函数名称') 
+
+- pytest - 参数化
+  - 在测试用例前面加上：@pytest.mark.parametrize('参数名'，列表数据)
+    - 参数名：用来接收每一项数据，并作为测试用例的参数
+    - 列表数据：一组测试数据
+- pytest - 重运行机制
+  - Pytest提供了重运行机制
+    - 插件名称：rerunfailures
+    - 安装方法：pip install pytest-rerunfailures
+  - 使用方式：
+    - 命令行参数形式
+    - 命令：pytest --rerun重试次数
+      - 比如：pytest --rerun 2表示：运行失败的用例可以重新运行两次
+    - 命令：pytest --rerun重试次数 --reruns-delay 次数之间的延时设置（单位：秒）
+      - 比如：pytest --rerun 2 --reruns-delay 5 表示失败的用例可以重新运行2次，第一次和第二次的间隔时间为5秒钟
