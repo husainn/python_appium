@@ -22,8 +22,8 @@ driver.get('http://www.baidu.com')
 data = driver.execute_script('return window.performance.getEntries();')
 print(type(data),data)
 dict1 = data[0]
-#页面load时间
+#页面load时间，页面资源都请求完了的时间
 duration = dict1['duration']
 
-print(dict1['duration'])
+print('页面加载时间是：',dict1['duration'])
 driver.close()
